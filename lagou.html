@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <meta name="description" content="拉勾首页动画">
+    <link rel="stylesheet" href="./frontend.css">
+    <title>power</title>
+    <style>
+        .outer {
+            width: 800px;
+            height: 80px;
+            display: flex;
+            padding: 20px;
+            box-sizing: content-box;
+        }
+        .inner {
+            flex: 1;
+            text-align: center;
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .one {
+            line-height: 80px;
+            font-size: 40px;
+            background-color: #3dc0f1;
+            pointer-events: none;
+        }
+        .hidden {
+            line-height: 80px;
+            font-size: 40px;
+            background-color: #ff9b57;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 100%;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+        <nav id="nav">
+            <ul>
+                <li><a href="/myWebsite/index.html">网站首页</a></li>
+                <li><a href="/myWebsite/html/frontend/index.html">前端学习</a></li>
+                <li><a href="/myWebsite/html/mylife/index.html">生活杂粹</a></li>
+                <li><a class="greet" href="/myWebsite/html/aboutme/index.html" data-li="~哈喽~">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="container">
+        <h2>尝试拉勾首页的动画效果(PC端网页)</h2>
+        <article id="content">
+            <p>当鼠标置于div上时，便有隐藏div显示，并且是按照鼠标进来的方向动画显示，离开时也是如此。那应该是监听mouseenter和mouseleave事件。</p>
+            <p>显示的div可以正常排列，隐藏的div做绝对定位可能会比较好。</p>
+            <div class="outer">
+                <div class="inner">
+                    <div class="one">我</div>
+                    <div class="hidden">隐藏汪</div>
+                </div>
+                <div class="inner">
+                    <div class="one">我</div>
+                    <div class="hidden">隐藏喵</div>
+                </div>
+                <div class="inner">
+                    <div class="one">我</div>
+                    <div class="hidden">隐藏咩</div>
+                </div>
+                <div class="inner">
+                    <div class="one">我</div>
+                    <div class="hidden">隐藏喔</div>
+                </div>
+                <div class="inner">
+                    <div class="one">我</div>
+                    <div class="hidden">隐藏啥</div>
+                </div>
+            </div>
+            <p>我回来啦~</p>
+            <p>差不多一个月没写了，这中间有割包皮（是的。。）、春节、相亲和参加别人婚礼等等各种事，好一段时间没学习状态了。加油吧，小八戒~</p>
+            <p>遇到一个想不通的问题，在设置hidden的style.left时，会莫名其妙报错'Cannot set property 'left' of undefined',但是给top就可以设置，我没找出为什么，所以也只做了上下的动画效果。</p>
+            <p>其实我做的很笨，在判断鼠标进出方向时，我的想法是获取鼠标的位置，然后和inner的四边位置相比较，来获取鼠标进出方向。</p>
+            <p>网上查了下，方法有两种，一种是斜率。设置坐标系，获取inner两对角线斜率以及鼠标位置和中心点相连的斜率，以此来判断。</p>
+            <p>第二种则更简单，通过Math.atan2(y,x)方法来获取角度。在我不打算百度只想自己想出来判断方法时，鬼知道这个方法。。ORZ</p>
+            <p>不难，理清思路就行。</p>
+
+
+        </article>
+    </section>
+    <script src="../../../js/index.js"></script>
+    <script>
+        var outer = document.querySelector('.outer');
+        var mouseX,mouseY;//鼠标在outer里的坐标
+        outer.addEventListener('mousemove',function (e) {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        });
+        var inner = document.querySelectorAll('.inner');
+        var cl,cr,ct,cb,target,hidden;//四边距离
+        for(var i = 0;  i<inner.length;i++ ){
+            inner[i].addEventListener('mouseenter',function (e) {
+                target = e.currentTarget;
+                cl = target.getBoundingClientRect().left;
+                cr = target.getBoundingClientRect().right;
+                ct = target.getBoundingClientRect().top;
+                cb = target.getBoundingClientRect().bottom;
+                hidden = target.children[1];
+                compare1();
+                
+            });
+            inner[i].addEventListener('mouseleave',function (e) {
+                target = e.currentTarget;
+                target = e.currentTarget;
+                cl = target.getBoundingClientRect().left;
+                cr = target.getBoundingClientRect().right;
+                ct = target.getBoundingClientRect().top;
+                cb = target.getBoundingClientRect().bottom;
+                hidden = target.children[1];
+                compare2();
+            })
+        }
+        function compare1() {//enter时的方向辨认
+            if(mouseX > cl && mouseX < cr){
+                if((mouseY - ct)<(cb - mouseY)){
+                    console.log('上');
+                    setTransition(hidden,'-100%','0','0','0');
+                }
+                else {
+                    console.log('下');
+                    setTransition(hidden,'100%','0','0','0');
+                }
+            }
+            else if(mouseX <= cl){
+                console.log('zuo')
+            }
+            else console.log('右')
+        }
+        function compare2() {//leave时的方向辨认
+            if(mouseX > cl && mouseX < cr){
+                if((mouseY - ct)<(cb - mouseY)){
+                    console.log('上chu');
+                    hidden.style.top = '-100%'
+                }
+                else {
+                    console.log('下chu');
+                    hidden.style.top = '100%'
+                }
+            }
+            else if(mouseX <= cl){
+                console.log('zuo')
+            }
+            else console.log('右')
+        }
+        function setTransition(target,top1,left1,top2,left2) {
+            target.style.transition = ' ';
+//            target.sytle.left = left1;
+            target.style.top = top1;
+            setTimeout(function () {
+                target.style.transition = '.3s linear all';
+//                target.sytle.left = left2;
+                target.style.top = top2;
+            },10)
+        }
+        
+        
+    </script>
+</body>
+</html>
