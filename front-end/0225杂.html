@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <meta name="description" content="拉勾首页动画">
+    <link rel="stylesheet" href="./css/frontend.css">
+    <title>power</title>
+    <style>
+        .ceshi {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+    </header>
+    <section id="container">
+        <h2>杂记</h2>
+        <article id="content">
+            <p>也许我很菜，但我一定不会放弃对技术的追逐！</p>
+            <p>翻到简书上某位同行的文章，笔记一二~三人行，必有我师。</p>
+            <h3>getComputedStyle</h3>
+            <div class="ceshi" style="width: 30px">ceshi</div>
+            <p>这个测试div有三个属性：1，行内样式width30px，2，外部css样式fontsize20px，3，嵌入式样式color red，当我只是简单地通过ceshi.style去取时，只能取到行内样式。</p>
+            <p>我需要使用getComputedStyle，其实chrome的element页面里下方css样式就有个这个，指的就是该元素每一个属性值（不管你是否设置）。MDN上是这么说滴：The Window.getComputedStyle() method gives the values of all the CSS properties of an element after applying the active stylesheets and resolving any basic computation those values may contain.</p>
+            <script>
+                var ceshi = document.querySelector('.ceshi');
+            </script>
+            <p>经过测试,window.getComputedStyle(ceshi,null).getPropertyValue('font-size')可取到值14px，getComputedStyle中的第二个参数是指第一个参数dom的伪类情况，比如':after'。在window.getComputedStyle(ceshi,null)返回的结果中，可以看到有两百多个css属性。。我的天。这和document.defaultView也是一样的效果。当然，以上这些是我不考虑IE的结果，IE9及以上可能还好，IE8？我这辈子都不想去兼容它了。</p>
+            <h3>一些移动端CSS属性</h3>
+            <p>当一个元素使用overflow: auto;出现滚动条时，用下面的属性可以隐藏掉滚动条，该属性只在webkit内核的浏览器中有效</p>
+            <pre>
+.all-ranks::-webkit-scrollbar {
+    display: none;
+}
+</pre>
+            <p>在iphone中，让overflow: auto的滚动更加接近native app的滚动效果</p>
+            <pre>
+.wrap {
+    -webkit-overflow-scrolling: touch;
+}
+</pre>
+            <p>在移动端，禁止长按链接与图片弹出菜单</p>
+            <pre>
+a, img {
+    -webkit-touch-callout: none; /*禁止长按链接与图片弹出菜单*/
+}
+</pre>
+            <p>禁止选中文本</p>
+            <pre>
+html, body {
+    -webkit-user-select: none; /*禁止选中文本*/
+    user-select: none;
+}
+</pre>
+            <p>去掉webkit默认的表单样式</p>
+            <pre>
+button,input,optgroup,select,textarea {
+    -webkit-appearance:none; /*去掉webkit默认的表单样式*/
+}
+</pre>
+            <p>去掉这些元素点击时的蓝色外边框和灰色半透明背景</p>
+            <pre>
+a,button,input,optgroup,select,textarea {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+</pre>
+            <p>隐藏Android的语音输入按钮</p>
+            <pre>
+input::-webkit-input-speech-button {
+    display: none;
+}
+</pre>
+            <h3>JS reduce</h3>
+            <p>对这个方法一直不甚理解，今天再来琢磨一番。</p>
+            <p>MDN的解释：The reduce() method applies a function against an accumulator and each value of the array (from left-to-right) to reduce it to a single value。操作对象是数组，用一个function去遍历数组，返回的是一个值。如下：</p>
+            <pre>
+var sum = [0, 1, 2, 3].reduce(function(acc, val) {
+  return acc + val;
+}, 0);
+</pre>
+            <p>两个参数，第一个是函数，第二个是初始值。函数返回的是两个参数相加值，故最后sum值为6。如果有提供初始值，则currentIndex从0起计算，否则跳过0，从1开始。尽量还是提供初始值，不然可能会出现以下几种情况：</p>
+            <pre>
+var maxCallback = ( pre, cur ) => Math.max( pre.x, cur.x );
+var maxCallback2 = ( max, cur ) => Math.max( max, cur );
+
+// reduce() without initialValue
+[ { x: 22 }, { x: 42 } ].reduce( maxCallback ); // 42
+[ { x: 22 }            ].reduce( maxCallback ); // { x: 22 }
+[                      ].reduce( maxCallback ); // TypeError
+
+// map/reduce; better solution, also works for empty arrays
+[ { x: 22 }, { x: 42 } ].map( el => el.x )
+                        .reduce( maxCallback2, -Infinity );
+</pre>
+            <p>讲真，我不是很明白它最后采用map例子，空数组的话，如果我不传initialValue，一样是TypeError啊。。。</p>
+            <p>MDN上有个联系不定参数一起的例子，如下：</p>
+            <pre>
+var friends = [
+{ name: 'Anna', books: ['Bible', 'Harry Potter'], age: 21 },
+{ name: 'Bob', books: ['War and peace', 'Romeo and Juliet'], age: 26 },
+{ name: 'Alice', books: ['The Lord of the Rings', 'The Shining'], age: 18 }
+]
+var allbooks = friends.reduce(function(prev, curr) {
+  return [...prev, ...curr.books];
+}, ['Alphabet']);
+
+// allbooks = ['Alphabet', 'Bible', 'Harry Potter', 'War and peace',
+// 'Romeo and Juliet', 'The Lord of the Rings', 'The Shining']
+</pre>
+
+
+        </article>
+    </section>
+    <script src="./index.js"></script>
+</body>
+</html>
