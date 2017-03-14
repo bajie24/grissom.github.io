@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <meta name="description" content="clip-path属性">
+    <link rel="stylesheet" href="./frontend.css">
+    <title>power</title>
+    <style>
+        img {
+            width: 300px;
+            height: 150px;
+        }
+        #ex1 {
+            clip-path: circle(15% at 60% 75%);
+        }
+        #ex2 {
+            clip-path: ellipse(9% 25% at 60% 75%);
+        }
+        #ex3 {
+            clip-path: polygon(20px 20px,100px 100px,200px 80px);
+        }
+        #ex4 {
+            clip-path: polygon(20px 20px,100px 20px,20px 100px,100px 100px);
+        }
+        #ex5 {
+            clip-path: polygon(20px 20px,100px 20px,100px 100px,20px 100px);
+        }
+        #ex6 {
+            -webkit-clip-path: polygon(20px 20px,100px 20px,20px 100px,100px 100px);
+            clip-path: polygon(20px 20px,100px 20px,20px 100px,100px 100px);
+            -webkit-transition: 2s all linear;
+            transition: 2s all linear;
+        }
+        .ex6 {
+            -webkit-clip-path: polygon(20px 20px,100px 20px,60px 60px,90px 90px,50px 130px,130px 130px) !important;
+            clip-path: polygon(20px 20px,100px 20px,60px 60px,90px 90px,50px 130px,130px 130px) !important;
+        }
+        #ex7 {
+            -webkit-clip-path: polygon(20px 20px,100px 20px,60px 60px,60px 60px,20px 100px,100px 100px);
+            clip-path: polygon(20px 20px,100px 20px,60px 60px,60px 60px,20px 100px,100px 100px);
+            -webkit-transition: 2s all linear;
+            transition: 2s all linear;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+    </header>
+    <section id="container">
+        <h2>CSS3 clip-path</h2>
+        <article id="content">
+            <p>菜鸡的我最近想写很多页面打开的特效，然后实力不足（不用任何插件）。比如像玻璃碎裂一样，打开下一个页面；又或者水滴滴下，朝四周波纹状散开等等。碰到一个新属性clip-path。perspective的话见<a href="0103.html">3号写的</a></p>
+            <p>clip-path是用来创建各种自定义图形的。</p>
+            <img src="../../../img/messi.jpg" id="">
+            <p>这么一张图片，300 * 150，比如我现在只要梅西的10号，并且是一个圆的形式。</p>
+            <img src="../../../img/messi.jpg" id="ex1"><pre>
+    clip-path: circle(15% at 60% 75%);
+</pre>
+            <p>15%表示圆半径，后两个分别是X轴Y轴位置，写具体px也是无所谓的。</p>
+            <p>椭圆:</p>
+            <img src="../../../img/messi.jpg" id="ex2">
+            <p>最重要还是掌握用polygon来画图~这个就是写出很多点坐标，连在一起就OK了。</p>
+            <p>三角形: </p>
+            <img src="../../../img/messi.jpg" id="ex3">
+            <p>沙漏：</p>
+            <img src="../../../img/messi.jpg" id="ex4">
+            <p>矩形：</p>
+            <img src="../../../img/messi.jpg" id="ex5">
+            <p>只要你愿意，可以画很多样子~我再加上transition试试</p>
+            <img src="../../../img/messi.jpg" id="ex6" class="">
+            <button id="dong">动次动次</button>
+            <p>transition无效。。。懵逼。。原来是变换前后的坐标必须一致。。。</p>
+            <img src="../../../img/messi.jpg" id="ex7" class="">
+            <button id="dong2">动次动次2</button>
+            <p>oh yeah~</p>
+            <p><a href="http://music.163.com/#/m/song?id=31654455&userid=268326267">纯音乐Victory</a></p>
+
+        </article>
+    </section>
+    <script src="./index.js"></script>
+    <script>
+        var dongci = document.querySelector('#dong');
+        var dongci2 = document.querySelector('#dong2');
+        var ex6 = document.querySelector('#ex6');
+        var ex7 = document.querySelector('#ex7');
+        dong.addEventListener('click',function () {
+            ex6.className = 'ex6';
+        })
+        dong2.addEventListener('click',function () {
+            ex7.className = 'ex6';
+        })
+    </script>
+</body>
+</html>
