@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <meta name="description" content="Promise">
+    <link rel="stylesheet" href="./frontend.css">
+    <title>power</title>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+    </header>
+    <section id="container">
+        <h2>ES6 Promise</h2>
+        <article id="content">
+            <p>之前在看《深入浅出Nodejs》时，看到里面的Promise/Deferred模式，一脸懵逼，只知道是异步相关的。想起现在ES2015也添加了promise，今天来学习下。</p>
+            <p>很多时候写代码，可能会需要使用很多的回调函数，出现callback hell，相当不美观。还有就是如果前一个函数执行有误，后面的函数可能就无法执行下去了。</p>
+            <p>使用promise既可以使代码变得直观，也可以避免不执行之后的方法。</p>
+            <p>Promise有三种状态：pending、fulfilled和rejected，状态的转换只有从penging到fullfilled或者pending到rejected。无论如何，不会有其他状态的改变。</p>
+            <p>创建一个Promise对象时，接收一个函数作为参数，示例如下：
+            <pre>
+function promiseTest(ready) {
+    var p = new Promise(function (resolve,reject) {//构造函数省略new又如何
+        console.log('1');
+        if(ready){
+            resolve('success');
+        }
+        else reject('failure');
+    })
+    return p;
+}</pre>
+            </p>
+            <h3>then</h3>
+<pre>
+promiseTest(true).then(function (value) {
+    console.log(value);
+},function (error) {
+    console.log(error);
+})
+console.log('2');
+</pre>
+            <p>
+                输出结果是 1 2 success。首先promisetest方法调用，1是没有判断的，必然输出。接下来执行then里面的方法，由于传进来的参数是true，所以会调用resolve方法输出succe。promise是异步调用 ，then里面的方法是最后执行的。
+            </p>
+            <p>事实上，如果我们做一个小小的改变，执行下面的代码：</p>
+            <pre>
+promiseTest(true).then(function (value) {
+    console.log(value);
+    return value;
+},function (error) {
+    console.log(error);
+}).then(function(value){
+    console.log(value + '2');
+})
+console.log('2');
+</pre>
+            <p>输出顺序为：1 2 success success2。也就是说，如果第一个then方法有返回值的话，将会返回一个promise对象，传进第二个then里，作为它的参数被调用执行。</p>
+<pre>
+function acd(value) {
+    console.log(value + '3');
+}
+promiseTest(true).then(function (value) {
+    console.log(value);
+    return value;
+},function (error) {
+    console.log(error);
+}).then(function (value) {
+    console.log(value+'2');
+}).then(acd);
+console.log('2');
+</pre>
+            <p>如上则输出 1 2 success success2 undefined3</p>
+            <h3>catch</h3>
+            <p>catch方法可以对错误进行集中处理，所以可以不对其他then方法设置错误时的回调。也就是等于then(undefined,onrejected)。</p>
+<pre>
+promiseTest(false).then(function (value) {
+    console.log(value);
+    return value;
+}).then(function (value) {
+    console.log(value+'2');
+}).then(acd)
+.catch(function (errormsg) {
+    console.log(errormsg);
+});
+console.log('2');
+</pre>
+            <p>如上只会输出 1 2 faliure</p>
+            <h3>all</h3>
+            <p>all方法的参数为promise对象组成的数组，这个方法也返回一个promise对象。如果数组中所有的promise对象都执行resolve了，那么这些resolve的值将作为一个数组成为all方法的返回值的resolve值，可以被之后的then方法处理。如果数组中任意的promise对象有reject，那么该reject的值就是all方法的返回值的reject值。all方法返回值的resolve值的顺序和all方法里数组参数的顺序一致，不按照时间先后顺序。</p>
+<pre>
+function pall() {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve('2000');
+        },2000)
+    })
+}
+function pall2() {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve('1000');
+        },1000)
+    })
+}
+Promise.all([pall(),pall2()]).then(function (value) {
+    console.log(value);
+})
+</pre>
+            <p>输出结果是['2000','1000']。</p>
+            <p>race</p>
+            <p>race方法和all类似，但是race方法里只要有数组中的某个promise对象状态发生变化，该方法就返回。和它的含义‘赛跑’一样。</p>
+            <p>对Promise的理解暂时就这么浅显了，后续若有补充，再行写作（PS：原来想写好点的博客这么累...）</p>
+            <p></p>
+        </article>
+        <script>
+            function promiseTest(ready) {
+                var p = new Promise(function (resolve,reject) {//构造函数省略new又如何
+                    console.log('1');
+                    if(ready){
+                        resolve('success');
+                    }
+                    else reject('failure');
+                })
+                return p;
+            }
+            function acd(value) {
+                console.log(value + '3');
+            }
+//            promiseTest(true).then(function (value) {
+//                console.log(value);
+//                return value;
+//            },function (error) {
+//                console.log(error);
+//            }).then(function (value) {
+//                console.log(value+'2');
+//            }).then(acd);
+//            console.log('2');
+
+//            promiseTest(false).then(function (value) {
+//                console.log(value);
+//                return value;
+//            }).then(function (value) {
+//                console.log(value+'2');
+//            }).then(acd)
+//            .catch(function (errormsg) {
+//                console.log(errormsg);
+//            });
+//            console.log('2');
+            
+            function pall() {
+                return new Promise(function (resolve) {
+                    setTimeout(function () {
+                        resolve('2000');
+                    },2000)
+                })
+            }
+            function pall2() {
+                return new Promise(function (resolve) {
+                    setTimeout(function () {
+                        resolve('1000');
+                    },1000)
+                })
+            }
+            Promise.all([pall(),pall2()]).then(function (value) {
+                console.log(value);
+            })
+            
+        </script>
+    </section>
+    <script src="./index.js"></script>
+</body>
+</html>
