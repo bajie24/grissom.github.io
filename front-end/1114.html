@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <link rel="stylesheet" href="./frontend.css">
+    <title>FrontEnd</title>
+</head>
+<body>
+<header id="header" class="clearfix">
+    <div id="logo">
+        zhou-grissom
+    </div>
+</header>
+<section id="container">
+    <h2>1110</h2>
+    <h3>就是说下这两天遇到的问题</h3>
+    <p>之前一个问题，position:fixed始终置底，输键盘的时候也不顶上来，目前我知道的办法是获取屏幕高度，出键盘时设置fixed定位的元素具体px的top</p>
+    <p>inputA触发inputB的focus，B的click事件也会触发（今天还知道点击a时也会触发a的点击事件）</p>
+    <input class="inputA" placeholder="inputA">
+    <input class="inputB" placeholder="inputB">
+    <script>
+        var inputA = document.querySelector('.inputA');
+        var inputB = document.querySelector('.inputB');
+        inputB.addEventListener('click',function () {
+            inputB.value = 'click';
+        });
+        inputA.addEventListener('click',function () {
+            inputB.focus();
+        })
+    </script>
+    <p>好吧，这就很尴尬了，这里没触发，冏，搁置，咳咳</p>
+    <p>话说ios的jquery方法存在着不少bug啊，比如：你用jquery的on方法绑定click事件时，ios里可能点击无效，需要给点击元素加个onclick=''。（这里我只知道click，其他未尝试）</p>
+    <p>一个不错的方法:getBoundingClientRect()，可以知道元素距离页面各方向的具体px，很不错的方法~</p>
+    <p>哎，没人能写出没问题的代码~我的红包页面问题百出，很多都是无法解决的。讲真，那么多手机啊，有一两款出现问题，也是挺无奈的事。</p>
+    <p>华为mate8里一个a标签始终无法跳转，给加了一个点击事件，结果alert了，妈蛋。</p>
+    <p>这个页面还有一些事，我很不满足！点击转赠按钮，出现弹框，就应该带着键盘嘛！妈的，我是用一个隐藏的input放下面的，给input点击事件，能带出键盘，这个input失焦，弹框里的input focus，可是这样又会在某些
+    手机上键盘先下去再立即上来。然后输账号，右边有个×的图片，点击清空输入框，可是焦点又没了，键盘下去了，操。经小马哥提醒，图片放后面去，获取点击位置，然后清空。焦点还在input里，可是，IOS里不知道为啥，无效。e.pageX,js和jquery的属性都不行。
+    FUCK，我讨厌彩笔！</p>
+    <p></p>
+    <p></p>
+    <p></p>
+</section>
+<script src="./index.js"></script>
+</body>
+</html>
