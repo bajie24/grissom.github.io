@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <link rel="stylesheet" href="./frontend.css">
+    <title>FrontEnd</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        .menu {
+            font-size: 0;
+        }
+        .menu li {
+            font-size: 20px;
+            display: inline-block;
+            width: 50px;
+            line-height: 30px;
+            text-align: center;
+            margin: 0 3px;
+            position: relative;
+        
+        }
+        .menu li:after {
+            top: -22%;
+            left: -15%;
+            right: 15%;
+            width: 130%;
+            height: 100%;
+            content: '';
+            z-index: -1;
+            border: 1px solid #dd856c;
+            position: absolute;
+            background-color: #a8a3a6;
+            transform-origin: bottom;
+            transform: perspective(0.5em) rotateX(10deg);
+            transition: 1s;
+        }
+        .m-li:after {
+            background-color: #71326f !important;
+        }
+    </style>
+</head>
+<body>
+<header id="header" class="clearfix">
+    <div id="logo">
+        zhou-grissom
+    </div>
+</header>
+<section id="container">
+    <h2>0103</h2>
+    <p>Buffer对象的内存分配，应用的是在C++层面上申请内存，在JavaScript中分配内存的策略</p>
+    <p>为了高效地使用申请来的内存，Node采用了slab分配机制。简单而言，slab就是一块申请好的固定大小的内存分配区域。三种状态：full，partial，empty。Node以8KB为界限来区分Buffer是大对象还是小对象。
+        当进行小而频繁的Buffer操作时，采用slab的机制进行预先申请和时候分配，使得JavaScript到操作系统之间不必有过多的内存申请方面的调用。对于大块的Buffer而言，则直接使用C++层面提供的内存，而无需细腻的分配操作。</p>
+    <p>TCP全名传输控制协议，在OSI模型（由七层组成，分别为物理层、数据链接层、网络层、传输层、会话层、表示层、应用层）中属于传输层协议。TCP是面向连接的协议，其显著的特征是在传输之前需要3次握手形成会话。只有会话形成后，服务器端和客户端之间才能互相发送数据。在创建会话的过程中，服务器端和客户端分别提供一个套接字，这两个套接字共同形成一个连接。服务器端与客户端则通过套接字实现两者之间的操作。</p>
+    <p>从协议的角度来说，浏览器其实是一个HTTP的代理，用户的行为将会通过它转化为HTTP请求报文发送给服务器端，服务器端在处理请求后，发送响应报文给代理，代理在解析报文后，将用户需要的内容呈现在界面上。 </p>
+    <p>简而言之，HTTP服务只做两件事：处理HTTP请求和发送HTTP响应</p>
+    <p>使用WebSockets API ，你可以让客户的与服务器端通过socket端口来传递数据，这样做的好处是可以实现数据推送技术——服务器端不再是被动地等待客户端发送出的请求，只要客户端与服务器端建立了一次连接之后，服务器端就可以在需要的时候，主动地将数据推送到客户端，直到客户端显示关闭这个连接。</p>
+    <p>模仿谷歌的标签栏(额，忽略它丑)</p>
+    <ul class="menu">
+        <li style="z-index: 10">北京</li>
+        <li style="z-index: 9">成都</li>
+        <li style="z-index: 8">南京</li>
+        <li style="z-index: 7">上海</li>
+        <li style="z-index: 6">广州</li>
+        <li style="z-index: 5">杭州</li>
+        <li style="z-index: 4">深圳</li>
+        <li style="z-index: 3">武汉</li>
+    </ul>
+    <p>最近打算把jQuery API都过一遍，不一定要敲，当时懂就行了。发现好多没想到、没注意的细节。有收获。</p>
+    <p>但是在用nodejs搭建个人网站时，疑惑颇多啊。</p>
+    
+</section>
+<script src="./index.js"></script>
+<script>
+    var liz;
+    $('.menu li').hover(function () {
+        liz = $(this).css('z-index');
+        $(this).addClass('m-li').css('z-index','20');
+//            console.log(liz);
+    }, function () {
+        $(this).removeClass('m-li').css('z-index',liz);
+    })
+
+</script>
+</body>
+</html>
