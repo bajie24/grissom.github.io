@@ -28,14 +28,15 @@
     </script>
     <div>来刮奖啦</div>
     <div id="guajiang">
-        <canvas id="mask" width="240" height="243"></canvas>
+        <canvas id="mask" width="250" height="243"></canvas>
     </div>
     <p>在此，我们可以运用Canvas中一种名为globalCompositeOperation的属性，通过将其设置为destination-out，使得在已经填充颜色的基础上再次进行绘制时，所绘制的区域变得透明，从而露出下方的奖项图片--谢谢刘欢</p>
     <style>
         #guajiang {
-            width: 240px;
+            width: 250px;
             height: 243px;
             background: url("./huojiang.jpg") no-repeat center;
+            background-size: 100% 100%;
         }
     </style>
     <script>
@@ -43,22 +44,23 @@
         var content = canvas.getContext('2d');
         content.beginPath();
         content.fillStyle = '#d1d1d1';
-        content.fillRect(0,0,240,243);
+        content.fillRect(0,0,250,243);
         content.closePath();
         content.globalCompositeOperation = 'destination-out';
         //为画布创建事件
         canvas.addEventListener('touchmove',function (e) {
             e.preventDefault();
             var touch = e.touches[0];
+            content = document.getElementById('mask').getContext('2d');
             content.beginPath();
             content.arc(touch.pageX - canvas.offsetLeft,touch.pageY - canvas.offsetTop,5,0,Math.PI * 2);
-            content.closePath();
             content.fillStyle = '#bdc3c7';
             content.fill();
+            content.closePath();
         })
     </script>
     <h2>真是日狗了，实在想不通，这里的代码为啥会出错！</h2>
-    
+    <p>编辑于2017，3,19.content在时间里有重新创建，暂时未理解何故。</p>
     <img src="./guajiang.png" style="width: 100%">
     
     <p>ios:gesture,gesturestart,gesturechange</p>
