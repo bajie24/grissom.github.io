@@ -6,17 +6,33 @@
     <meta name="viewport"
           content="width=device-width,,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <meta name="author" content="grissom">
-    <meta name="description" content="">
-    <title>Title</title>
+    <meta name="description" content="JS跨域请求学习">
+    <link rel="stylesheet" href="../frontend.css">
+    <title>JS跨域请求学习</title>
 </head>
 <body>
+    <p>学习别人的，就要醒目位置标出来，学习自：https://my.oschina.net/u/3341316/blog/856682</p>
 	<script>
         function dosth(data) {
-            console.log(data);
+//            console.log(data);
         }
     </script>
     <!--<script src="http://www.zhou-grissom.com/html/mylife/16/12317.html?callback=dosth"></script>-->
     <!--<script src="https://unpkg.com/vue/?callback=dosth"></script>-->
-    <script src="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651551956&idx=2&sn=aef392aafb89342f414db67cd5b9af1c&chksm=8025af15b75226031c0507d1c80091936faa2efb435dee6f13bff18200817047e9c1ee2187b0&mpshare=1&scene=1&srcid=03205uevhC3LJir91ZnPwYj3&pass_ticket=q1m8S%2BscmpzD9UG5gScwR7t32GkF%2BuLjKNpU9xnPuVQ%3D#rd?callback=dosth"></script>
+    <pre>
+    src="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651551956&idx=2&sn=aef392aafb89342f414db67cd5b9af1c&chksm=8025af15b75226031c0507d1c80091936faa2efb435dee6f13bff18200817047e9c1ee2187b0&mpshare=1&scene=1&srcid=03205uevhC3LJir91ZnPwYj3&pass_ticket=q1m8S%2BscmpzD9UG5gScwR7t32GkF%2BuLjKNpU9xnPuVQ%3D#rd?callback=dosth"
+    </pre>
+    <p>JS跨域请求的几种办法，来学习一个，你问我对跨域是资不资持，我是资持的(膜)。</p>
+    <p>这里说的 JS 跨域是指通过 JS 在不同的域之间进行数据传输或通信，比如用ajax向一个不同的域请求数据，或者通过js获取页面中不同域的框架中(iframe)的数据。只要协议、域名、端口有任何一个不同，都被当作是不同的域。</p>
+    <p>第一种是喜闻乐见的jsonp方式，在src的地址后加了个callback，进行请求后，回调函数dosth方法里的参数即是我们要的数据。当然这里由于我请求了整个页面，就不是json数据了，会有报错，请求结果如下所示。</p>
+    <img src="./json1.png" alt="jsonp1请求">
+    <p>第二种方法是同域名下的不同子页面之间的数据交流，为此再建一个测试页面，突突突。</p>
+    <iframe src="https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain2.html"></iframe>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <script src="../index.js"></script>
 </body>
 </html>
