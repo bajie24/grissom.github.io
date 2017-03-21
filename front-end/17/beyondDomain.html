@@ -33,10 +33,12 @@
             <p>JS跨域请求的几种办法，来学习一个，你问我对跨域是资不资持，我是资持的(膜)。</p>
             <p>这里说的 JS 跨域是指通过 JS 在不同的域之间进行数据传输或通信，比如用ajax向一个不同的域请求数据，或者通过js获取页面中不同域的框架中(iframe)的数据。只要协议、域名、端口有任何一个不同，都被当作是不同的域。</p>
             <p>第一种是喜闻乐见的jsonp方式，在src的地址后加了个callback，进行请求后，回调函数dosth方法里的参数即是我们要的数据。当然这里由于我请求了整个页面，就不是json数据了，会有报错，请求结果如下所示。</p>
-            <img src="./json1.png" alt="jsonp1请求">
+            <img src="./jsonp.png" alt="jsonp请求">
             <p>第二种方法是同域名下的不同子页面之间的数据交流，为此再建一个测试页面，突突突。</p>
-            <iframe src="https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain2.html"></iframe>
-            <p></p>
+            <iframe src="https://www.baidu.com/"></iframe>
+            <p>
+                这里看原文，我们只要把http://www.example.com/a.html 和 http://example.com/b.html这两个页面的document.domain都设成相同的域名就可以了。但要注意的是，document.domain的设置是有限制的，我们只能把document.domain设置成自身或更高一级的父域，且主域必须相同。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。
+            </p>
             <p></p>
             <p></p>
             <p></p>
