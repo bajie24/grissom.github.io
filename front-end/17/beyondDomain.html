@@ -36,7 +36,7 @@
 </pre>
             <img src="./jsonp.png" alt="jsonp请求" style="width: 100%">
             <p>第二种方法是设置document.domain，为此再建一个测试页面，突突突。</p>
-            <iframe src="https://www.baidu.com/"></iframe>
+            <!--<iframe src="https://www.baidu.com/"></iframe>-->
             <iframe src="https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain2.html"></iframe>
             <p>
                 这里看原文，我们只要把http://www.example.com/a.html 和 http://example.com/b.html这两个页面的document.domain都设成相同的域名就可以了。但要注意的是，document.domain的设置是有限制的，我们只能把document.domain设置成自身或更高一级的父域，且主域必须相同。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。
