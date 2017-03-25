@@ -12,8 +12,27 @@
 </head>
 <body>
     <p>学习</p>
+    <div id="container" style="background-color: #3B9BE5;width: 200px;height: 200px" onclick="changeColor();">
+        click to change color
+    </div>
     <script>
 //        document.domain = 'https://github.com'
+    </script>
+    <script>
+        var container = document.getElementById('container');
+        function changeColor() {
+            container.style.backgroundColor = 'rgb(' + (Math.random()*255).toFixed(0) + ',' + (Math.random()*255).toFixed(0) + ',' + (Math.random()*255).toFixed(0) + ')';
+            var color = container.style.backgroundColor;
+            window.parent.postMessage(color,'https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html');
+            console.log(window.parent);
+        }
+        window.addEventListener('message',function (e) {
+            var origin = event.origin || event.originalEvent.origin;
+            if (origin !== "https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html") return;
+            var color = container.style.backgroundColor;
+            console.log(window.parent,e);
+            window.parent.postMessage(color,'https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html');
+        })
     </script>
 </body>
 </html>
