@@ -83,7 +83,7 @@ function receiveMessage(event)
                 }
                 window.addEventListener('message',function (e) {
                     var origin = event.origin || event.originalEvent.origin;
-                    if (origin !== "http://www.zhou-grissom.com/") return;
+                    if (origin !== "http://www.zhou-grissom.com") return;
                     var color = e.data;
                     console.log(e);
                     post.style.backgroundColor = color;
@@ -113,9 +113,8 @@ function receiveMessage(event)
                 })
             </script>
             <p>完美。现在当你点击其上的按钮时，就可以获取到另一个页面的颜色，给下方的div设置了。当然，上面有个iframe是对另一个的引用，你点击其中的改变颜色div时，下方的也会跟着变！</p>
-            <p></p>
-            <p></p>
-            <p></p>
+            <p>现在对第四种方法总结下：在https和http之间，我仍然一无所知，究竟是否可以；此外，e.origin不是整个链接，而只是前面的域名而已，不要加‘/’！！我忍不住自罚耳光两个。 </p>
+            <p>技术的世界真好玩，哈哈</p>
             
         </article>
     </section>
