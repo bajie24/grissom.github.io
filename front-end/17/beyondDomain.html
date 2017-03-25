@@ -72,22 +72,22 @@ function receiveMessage(event)
             <iframe id="frame" src="http://www.zhou-grissom.com/html/frontend/17/jsdomain.html"></iframe>
             <script>
                 
-                window.onload = function () {
-                    var post = document.getElementById('post');
-                    var frame = document.getElementById('frame').contentWindow;
-                    var btn =document.getElementById('btn')
-                    btn.addEventListener('click',function (e) {
-                        e.preventDefault();
-                        frame.postMessage('给你颜色','http://www.zhou-grissom.com/');
-                    })
-                }
-                window.addEventListener('message',function (e) {
-                    var origin = event.origin || event.originalEvent.origin;
-                    if (origin !== "http://www.zhou-grissom.com/html/frontend/17/jsdomain.html") return;
-                    var color = e.data;
-                    console.log(e);
-                    post.style.backgroundColor = color;
-                })
+//                window.onload = function () {
+//                    var post = document.getElementById('post');
+//                    var frame = document.getElementById('frame').contentWindow;
+//                    var btn =document.getElementById('btn')
+//                    btn.addEventListener('click',function (e) {
+//                        e.preventDefault();
+//                        frame.postMessage('给你颜色','http://www.zhou-grissom.com/');
+//                    })
+//                }
+//                window.addEventListener('message',function (e) {
+//                    var origin = event.origin || event.originalEvent.origin;
+//                    if (origin !== "http://www.zhou-grissom.com/html/frontend/17/jsdomain.html") return;
+//                    var color = e.data;
+//                    console.log(e);
+//                    post.style.backgroundColor = color;
+//                })
             </script>
             <p>失败，如下图所示:</p>
             <img src="postFailure.png" alt="postMessage失败" style="width: 100%;">
