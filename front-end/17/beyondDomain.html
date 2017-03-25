@@ -106,7 +106,7 @@ function receiveMessage(event)
                 window.addEventListener('message',function (e) {
                     var post2 = document.getElementById('post2');
                     var origin = event.origin || event.originalEvent.origin;
-                    if (origin !== "https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html") return;
+                    if (origin !== "https://bajie24.github.io/") return;
                     var color = e.data;
                     console.log(e);
                     post2.style.backgroundColor = color;

@@ -28,10 +28,11 @@
         }
         window.addEventListener('message',function (e) {
             console.log(e);
-            var origin = event.origin || event.originalEvent.origin;
-            if (origin !== "https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html") return;
-            var color = container.style.backgroundColor;
             console.log(window.parent);
+            var origin = event.origin || event.originalEvent.origin;
+            if (origin !== "https://bajie24.github.io") return;
+            var color = container.style.backgroundColor;
+            console.log('1')
             window.parent.postMessage(color,'https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html');
         })
     </script>
