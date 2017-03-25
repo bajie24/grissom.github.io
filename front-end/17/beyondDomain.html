@@ -37,7 +37,7 @@
             <img src="./jsonp.png" alt="jsonp请求" style="width: 100%">
             <p>第二种方法是设置document.domain，为此再建一个测试页面，突突突。</p>
             <!--<iframe src="https://www.baidu.com/"></iframe>-->
-            <iframe id="bd2" src="https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain2.html"></iframe>
+            <iframe id="bd2" src="https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain2.html" style="width: 400px;height: 400px;;"></iframe>
             <p>
                 这里看原文，我们只要把http://www.example.com/a.html 和 http://example.com/b.html这两个页面的document.domain都设成相同的域名就可以了。但要注意的是，document.domain的设置是有限制的，我们只能把document.domain设置成自身或更高一级的父域，且主域必须相同。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。
             </p>
@@ -69,25 +69,25 @@ function receiveMessage(event)
             <p>刚好自己有个虚拟主机，就来做个实验试试吧！</p>
             <div id="post" style="width: 200px;height: 200px;border: 1px solid indianred">my color</div>
             <button id="btn">postMessage</button>
-            <!--<iframe id="frame" src="http://www.zhou-grissom.com/html/frontend/17/jsdomain.html"></iframe>-->
+            <iframe id="frame" src="http://www.zhou-grissom.com/html/frontend/17/jsdomain.html"></iframe>
             <script>
                 
-//                window.onload = function () {
-//                    var post = document.getElementById('post');
-//                    var frame = document.getElementById('frame').contentWindow;
-//                    var btn =document.getElementById('btn')
-//                    btn.addEventListener('click',function (e) {
-//                        e.preventDefault();
-//                        frame.postMessage('给你颜色','http://www.zhou-grissom.com/');
-//                    })
-//                }
-//                window.addEventListener('message',function (e) {
-//                    var origin = event.origin || event.originalEvent.origin;
-//                    if (origin !== "http://www.zhou-grissom.com/html/frontend/17/jsdomain.html") return;
-//                    var color = e.data;
-//                    console.log(e);
-//                    post.style.backgroundColor = color;
-//                })
+                window.onload = function () {
+                    var post = document.getElementById('post');
+                    var frame = document.getElementById('frame').contentWindow;
+                    var btn =document.getElementById('btn')
+                    btn.addEventListener('click',function (e) {
+                        e.preventDefault();
+                        frame.postMessage('给你颜色','http://www.zhou-grissom.com/');
+                    })
+                }
+                window.addEventListener('message',function (e) {
+                    var origin = event.origin || event.originalEvent.origin;
+                    if (origin !== "http://www.zhou-grissom.com/") return;
+                    var color = e.data;
+                    console.log(e);
+                    post.style.backgroundColor = color;
+                })
             </script>
             <p>失败，如下图所示:</p>
             <img src="postFailure.png" alt="postMessage失败" style="width: 100%;">
@@ -112,7 +112,7 @@ function receiveMessage(event)
                     post2.style.backgroundColor = color;
                 })
             </script>
-            <p></p>
+            <p>完美。现在当你点击其上的按钮时，就可以获取到另一个页面的颜色，给下方的div设置了。当然，上面有个iframe是对另一个的引用，你点击其中的改变颜色div时，下方的也会跟着变！</p>
             <p></p>
             <p></p>
             <p></p>
