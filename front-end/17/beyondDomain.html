@@ -66,14 +66,14 @@ function receiveMessage(event)
 }
 </pre>
             <p>目标窗口监听message事件来获取数据。message属性有：data，从其他window中传递过来的对象；origin，消息发送方窗口的origin；source，消息发送方窗口的引用，可以用此在两个具有不同origin的两个窗口之间建立双向通信。</p>
-            <p>刚好自己有个主机，就来做个实验试试吧！</p>
+            <p>刚好自己有个虚拟主机，就来做个实验试试吧！</p>
             <div id="post" style="width: 200px;height: 200px;border: 1px solid indianred">my color</div>
             <iframe id="frame" src="http://www.zhou-grissom.com/html/frontend/17/jsdomain.html"></iframe>
             <script>
                 
                 window.onload = function () {
                     var post = document.getElementById('post');
-                    document.getElementById('frame').contentWindow.postMessage('给你颜色','http://www.zhou-grissom.com/html/frontend/17/jsdomain.html');
+                    document.getElementById('frame').contentWindow.postMessage('给你颜色','https://bajie24.github.io/zhou-grissom/front-end/17/beyondDomain.html');
                 }
                 window.addEventListener('message',function (e) {
                     var origin = event.origin || event.originalEvent.origin;
