@@ -73,12 +73,13 @@ function receiveMessage(event)
                 
                 window.onload = function () {
                     var post = document.getElementById('post');
-                    document.getElementById('frame').contentWindow.postMessage('给你颜色','http://www.zhou-grissom.com/html/frontend/17/jsdomain.html');
+                    document.getElementById('frame').contentWindow.postMessage('给你颜色','http://www.zhou-grissom.com/');
                 }
                 window.addEventListener('message',function (e) {
                     var origin = event.origin || event.originalEvent.origin;
                     if (origin !== "http://www.zhou-grissom.com/html/frontend/17/jsdomain.html") return;
                     var color = e.data;
+                    console.log(e);
                     post.style.backgroundColor = color;
                 })
             </script>
