@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="author" content="grissom">
+    <link rel="stylesheet" href="../frontend.css">
+    <meta name="description" content="div自适应和正则表达式">
+    <title>div自适应和正则表达式</title>
+</head>
+<body>
+<header id="header" class="clearfix">
+    <div id="logo">
+        zhou-grissom
+    </div>
+</header>
+<section id="container">
+    <h2>div自适应和正则表达式简单学习</h2>
+    <p>没什么借口，自己懒了，好久没写。</p>
+    <p>在实际工作中，我们经常会遇到一个问题:一行两个div，左侧div宽度固定，右侧div宽度自适应。我想到了如下几种办法。</p>
+    <p>1，最常见的莫过于flex布局，示例如下：</p>
+    <div style="display: flex;height: 100px">
+        <div style="background-color: indianred;width: 100px"></div>
+        <div style="background-color: #3B9BE5;flex: 1"></div>
+    </div>
+    <p>2,右div绝对定位</p>
+    <div class="a">
+        <div class="b"></div>
+        <div class="c"></div>
+    </div>
+    <style>
+        .a {
+            position: relative;
+            height: 100px;
+        }
+        .b,.c {
+            height: inherit;
+        }
+        .b {
+            width: 100px;
+            background-color: indianred;
+        }
+        .c {
+            background-color: #3B9BE5;
+            position: absolute;
+            left: 100px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+    </style>
+    <p>3,给父div设置padding-left(此时左div既可以绝对定位也可以浮动在左侧)：</p>
+    <div class="d">
+        <div class="e"></div>
+        <div class="f"></div>
+    </div>
+    <style>
+        .d,.e,.f {
+            height: 100px;
+        }
+        .d {
+            padding-left: 100px;
+            position: relative;
+        }
+        .e {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            background-color: indianred;
+        }
+        .f {
+            width: 100%;
+            background-color: #3B9BE5;
+        }
+    </style>
+    <p>4，使用calc属性</p>
+    <div class="g">
+        <div class="h"></div>
+        <div class="i"></div>
+    </div>
+    <style>
+        .g,.h,.i {
+            height: 100px;
+        }
+        .h {
+            width: 100px;
+            background-color: indianred;
+        }
+        .g {
+            font-size: 0;
+        }
+        .h,.i {
+            display: inline-block;
+        }
+        .i {
+            background-color: #3B9BE5;
+            width: calc(100% - 100px);
+        }
+    </style>
+    <p>前几天在做流量和话费充值时，遇到输入手机号自动加空格的问题。我第一反应是在输入到第三位和第八位时自动加个空格，在删减到第十位和第四位时自动去掉空格，这个不难实现。可是同事和我说可以用正则表达式写，我就上心了，这几天终于给写了出来。</p>
+    <p>如果用正则表达式写，那也就是每次输入时对输入的值进行格式化，在第三位和第七位后加空格并且这两位后一定要是数字。每次格式化时，不妨先将input里的内容去掉内容再加空格，更易实现。我在这儿遇到最大的困难是如何实现344呢，最后想出了一个邪门歪道解决了：第一位前先加一个数字然后最后去掉它就行了嘛，444格式很易实现。</p>
+    <input id="input" maxlength="13" oninput="test()" style="border: 1px solid #2072cf">
+    <script>
+        var input = document.getElementById('input');
+        function test(){
+            var value = input.value;
+            value = '0' + value;
+            input.value = ((value.replace(/\s/,'')).replace(/(\d{4})(?=\d)/g,'$1 ')).substr(1);
+        }
+    </script>
+    <p>这就很轻易的实现啦~</p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</section>
+<script src="../index.js"></script>
+</body>
+</html>
