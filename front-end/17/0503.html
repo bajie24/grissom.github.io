@@ -106,20 +106,32 @@
         function test(){
             var value = input.value;
             value = '0' + value;
-            input.value = ((value.replace(/\s/,'')).replace(/(\d{4})(?=\d)/g,'$1 ')).substr(1);
+            input.value = ((value.replace(/\s/g,'')).replace(/(\d{4})(?=\d)/g,'$1 ')).substr(1);
         }
     </script>
     <p>这就很轻易的实现啦~</p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+    <p>附：测试发现一个问题，每次在中间数错的话，然后删除，光标会跑到最后去，要求解决。</p>
+    <p>想到setSelectionRange</p>
+    <p>最后优化如下：</p>
+    <input id="input2" maxlength="13" oninput="test2()" style="border: 1px solid #2072cf">
+    <script>
+        var input2 = document.getElementById('input2');
+        var ss,il1 = 0, il2 =0;
+        function test2(){
+            var value2 = input2.value;
+            ss = input2.selectionStart;
+            value2 = '0'+ value2;
+            input2.value =(value2.replace(/\s/g,'').replace(/(\d{4})(?=\d)/g,"$1 ")).substr(1);
+            il2 = input2.value.length;
+            if((il2 - il1) == 2){
+                ss++ ;
+            }
+            il1 = il2;
+            input2.setSelectionRange(ss,ss);
+            
+        }
+    </script>
+
 </section>
 <script src="../index.js"></script>
 </body>

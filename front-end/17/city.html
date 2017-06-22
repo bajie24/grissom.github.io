@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>power</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #nav {
+            position: relative;
+        }
+        .pro-name {
+            font-size: 18px;
+            line-height: 40px;
+            background-color: #c9c9d4;
+        }
+        .p-city {
+            line-height: 30px;
+            background-color: #dbffd0;
+            border-bottom: 1px solid #554a4b;
+        }
+        #sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            pointer-events: auto;
+        }
+        .side {
+            color: #2072cf;
+            border-radius: 50%;
+            text-align: center;
+            width: 20px;
+            line-height: 22px;
+            display: block;
+            /*pointer-events: auto;*/
+        }
+        #center {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            line-height: 40px;
+            width: 40px;
+            background-color: #5f8ec1;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+        }
+        #a {
+            height: 667px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <div id="a">
+            <div class="province" v-for="(value,key) in city">
+                <div class="pro-name" :id="key">{{key}}</div>
+                <div class="p-city" v-for="item in value" >
+                    {{item}}
+                </div>
+            </div>
+
+            <div id="center"></div>
+        </div>
+        <div id="sidebar">
+            <a class="side" :href= "'#' + item" v-for="item in sidebar">{{item}}</a>
+        </div>
+    </div>
+
+</body>
+    <script src="bundle.js"></script>
+
+    <script>
+        var url = document.URL;
+        url = url.indexOf('#') ? url.substr(0,url.indexOf('#')) : document.URL ;
+        var sidebar = document.getElementById('sidebar');
+        var center = document.getElementById('center');
+        var side = document.querySelectorAll('.side');
+        var a = document.getElementById('a');
+        var zimu, y,num;
+        var sidebar_array = ['当','热','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        var sby = sidebar.getBoundingClientRect().top;
+var nav = document.getElementById('nav');
+        var ua = window.navigator.userAgent;
+        var ual = Math.floor(ua.substr((ua.lastIndexOf('/')+1)));
+        sidebar.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+            center.style.display = 'block';
+            y = e.touches[0].clientY ;
+            num = (y- sby)/22;
+            zimu = sidebar_array[Math.floor(num)];
+            center.textContent = zimu;
+            window.location.href = url + '#' + zimu;
+        });
+        sidebar.addEventListener('touchend', function (e) {
+            setTimeout(function () {
+                center.style.display = 'none';
+            },300)
+        });
+        sidebar.addEventListener('touchmove', function (e) {
+
+            y = e.touches[0].clientY;
+            num = (y- sby)/22;
+            zimu = sidebar_array[Math.floor(num)];
+            center.textContent = zimu;
+            window.location.href = url + '#' + zimu;
+        })
+
+
+    </script>
+</html>
