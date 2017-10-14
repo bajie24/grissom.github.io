@@ -1,0 +1,18 @@
+#main {
+    display: flex;
+}
+.lamp {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border: 2px solid red;
+}
+.lamp.light {
+    background-color: yellow;
+}
+li {
+    margin: 10px;
+}
+button.press {
+    background-color: #bdcad8
+}

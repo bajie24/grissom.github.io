@@ -1,0 +1,31 @@
+.hit-area {
+    width: 310px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.hit-item {
+    width: 80px;
+    border-radius: 80px;
+    height: 80px;
+    margin: 10px;
+    border: 1px solid #31707E;
+    position: relative;
+    overflow: hidden;
+}
+.hit-item .luffy {
+    background: url(./luffy.png) no-repeat center;
+    background-size: contain;
+    height: 60px;
+    width: 60px;
+    left: 10px;
+    top: 10px;
+    transform: translateY(70px);
+    position: absolute;
+    transition: all .1s linear;
+}
+#restart {
+    margin: 10px 20px;
+    width: 60px;
+    height: 26px;
+}

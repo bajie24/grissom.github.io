@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="grissom">
+    <meta name="description" content="vue-demo-hitLuffy">
+    <link rel="stylesheet" href="../../frontend.css">
+    <link href="./style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+    </header>
+    <section id="container">
+        <h2>ES6 Promise</h2>
+        <article id="content">
+            <div id="main">
+                <div class="hit-area">
+                    <hit v-for='(item,index) in classLists' @hideluffyliftup="countLuffy" :key='index' :class="item"></hit>
+                </div>
+                <button id="restart" @click="restartGame" type="button">restart</button>
+            </div>
+        </article>
+    </section>
+</body>
+<script src="./dist/build.js"></script>
+
+</html>
