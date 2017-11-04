@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,,initial-scale=1.0">
+    <meta name="author" content="grissom">
+    <meta name="description" content="svg">
+    <link rel="stylesheet" href="../frontend.css">
+    <title>power</title>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+    </header>
+    <section id="container">
+        <h2>svg初了解之一</h2>
+        <article id="content">
+            <p>svg么，我认为肯定是前端学习之路上不可避免的知识点。最近买了本《svg精髓》和《深入浅出svg》，自当写点blog以加深印象。</p>
+            <p>碰到的第一个难点是viewBox里使用preserveAspectRatio那块儿。用demo说话。</p>
+            <svg width='300' height='200' viewBox='0 0 120 100' preserveAspectRatio='xMidYMid meet'>
+                <rect width='50' height='50' style="fill:red;stroke:none"></rect>
+            </svg>
+            <p>如上这么一个svg，视口，即viewport，大小为宽300，高200，viewBox为 0 0 120 100，preserveAspectRatio属性为'xMidYMid meet'。刚看到的时候我就想不是居中吗，为什么红色矩形没居中呢？</p>
+            <p>问题在于要理解viewBox到底是什么？</p>
+            <p>外部的svg为视口，而其上的viewBox可以这样理解：我们平时都用过QQ截图吧，整个屏幕为视口，而viewBox呢，在诞生之初是和整个屏幕一样大的，这时候preserveAspectRatio属性值是none，没有任何拉伸或压缩。
+                如果rect的宽高设为120和100即可见。W3C给了preserveAspectRatio一个default值：xMidYMid meet。先用第二个值重新确定viewBox大小。meet即适应视口最小长度，缩小viewBox以适配可用的空间。
+                例如现在是宽比例比高比例大，所以viewBox高度是200，宽度240，如果viewBox改为 0 0 180 100，里面rect宽高也改为180和100，那么现在的宽比例比高比例小了，就变成宽度300，高度166.67了。
+                而svg里坐标系是往左下方的，rect现在坐标默认0 0，所以是从左上方开始排列，因此，我们看到的红色矩形没有相对于viewpoint居中。当然，除了meet还有个slice值，用于适配最大宽高比的，原理同上。
+            </p>
+            <p>再说preserveAspectRatio的第一个值，表示的是图像相对视口的位置。，例如，xMinYMin是视口的x轴最左侧边缘与viewBox的最左侧边缘对齐，y轴方向亦如此。而xMaxYMid时候viewBox的右侧与viewport的右侧边缘对齐，
+                同时viewBox在viewPort里上下居中。
+            </p>
+            <p>第二个没想通的是svg transform里的skewX和skewY变换。skewX(30)是默认X轴倾斜30度，在此基础上绘制坐标点，最后再让x轴回位，结果就反而是Y轴歪了，没清楚为什么是这样的。skewY的话是往左下倾斜。</p>
+            <p>值得一提的是，svg里transform的变换都是在之前的坐标系基础上先绘制新的变换后的坐标系再进行布点。</p>
+
+        </article>
+    </section>
+    <script src="../index.js"></script>
+
+</body>
+</html>
