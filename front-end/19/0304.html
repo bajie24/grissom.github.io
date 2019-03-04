@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="../frontend.css">
+    <title>power</title>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            zhou-grissom
+        </div>
+    </header>
+    <section id="container">
+      <h2>0304杂记</h2>
+      <article id="content">
+        <p>一年多没写了。。。long long time。稍微写点开个新年的头吧。说说最近遇到的一些问题吧，觉得自己好菜o(╯□╰)o</p>
+        <p>line-height若设为1.2或者20px之类，在安卓机里会靠上些。如果高度不小，尚看不清楚，但若是很小的block，会显得很明显。通过搜索加研究，可设置line-height:normal + padding的方式让其显得居中。</p>
+        <p>前两日将一个背景图片替换成两张背景图片加背景色时，发现background也有层级：jpg > background-color > png。</p>
+        <p>在跨域的时候，除了contentType为application/x-www-form-urlencoded, multipart/form-data或者text/plain外，都会触发浏览器先发送方法为OPTIONS的请求</p>
+        <p>$emit之后的语句不会执行，因为return了。是得看看源码才行== 》==</p>
+        <p>vue-lazyload 当需要动态切换图片时，原来需要加个key：<img v-lazy="ImgSrc" :key="ImgSrc"></p>
+      </article>
+    </section>
+
+</body>
+  <script src="../index.js"></script>
+
+
+</html>
