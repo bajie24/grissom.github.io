@@ -9,13 +9,13 @@
 </head>
 
 <body>
-
+    <div id="a"></div>
 </body>
 <script>
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             console.log(position)
-            alert(position)
+            document.querySelector('#a').textContent = position
         })
     }
 </script>
