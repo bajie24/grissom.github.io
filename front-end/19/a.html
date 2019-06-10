@@ -15,7 +15,7 @@
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             console.log(position)
-            document.querySelector('#a').textContent = position
+            document.querySelector('#a').innerHtml = position.coords
         })
     }
 </script>
